@@ -10,7 +10,12 @@ class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute({ email, name }: IRequest): User {
-    // Complete aqui
+    const mail = this.usersRepository.findByEmail(email)
+    if (mail){
+      throw new Error("usuário já cadastrado");
+    }
+    const user : User = this.usersRepository.create({email,name})
+    return user
   }
 }
 

@@ -1,3 +1,5 @@
+import {v4 as uuid4} from 'uuid'
+
 import { User } from "../../model/User";
 import { IUsersRepository, ICreateUserDTO } from "../IUsersRepository";
 
@@ -19,23 +21,46 @@ class UsersRepository implements IUsersRepository {
   }
 
   create({ name, email }: ICreateUserDTO): User {
-    // Complete aqui
+    const user : User = {
+      id: uuid4(),
+    
+      name,
+    
+      admin: false,
+    
+      email,
+    
+      created_at: new Date(),
+    
+      updated_at: new Date()
+    }
+
+    this.users.push(user)
+    return user
   }
 
-  findById(id: string): User | undefined {
-    // Complete aqui
+  findById(id: string ): User | undefined  {
+    const user = this.users.find(item=>{return item.id === id})   
+    
+    return user
   }
 
-  findByEmail(email: string): User | undefined {
-    // Complete aqui
+  findByEmail(email: string): User | undefined  {
+    const user = this.users.find(item=>{return item.email === email})   
+    return user
   }
 
   turnAdmin(receivedUser: User): User {
-    // Complete aqui
+    const user = this.users.find(item=>{return item.id === receivedUser.id})
+    if (!user) {
+      throw new Error("usuário não existe");
+    }
+    user.admin = true
+    return user
   }
 
-  list(): User[] {
-    // Complete aqui
+  list(): User[]  {
+    return this.users
   }
 }
 
