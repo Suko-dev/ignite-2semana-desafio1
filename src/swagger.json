@@ -1,0 +1,128 @@
+{
+    "openapi": "3.0.0",
+    "info":{
+        "title":"Documentation",
+        "description":"This is an rent API",
+        "version":"1.0.0",
+        "contact":{
+            "email":"mvribeirodev@gmail.com"
+        }
+    },
+    "paths":{
+        "/users":{
+            "post":{
+                "tags":["User"],
+                "summary":"Create user",
+                "description":"Create a new user",
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "name":{
+                                        "type": "string"
+                                    },
+                                    "email":{
+                                        "type":"string"
+                                    }
+                                },
+                                "exemple":{
+                                    "name":"test",
+                                    "email":"test@test.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "response":{
+                    "201":{
+                        "description": "Created"
+                    },
+                    "500":{
+                        "description": "Bad request"
+                    }
+                }
+
+            },
+            "patch":{
+                "tags":["User"],
+                "summary":"Update user",
+                "description":"Turn user admin",
+                "response":{
+                    "200":{
+                        "description": "Ok"
+                    },
+                    "500":{
+                        "description": "Bad request"
+                    }
+                }
+
+            },
+            "get":{
+                "tags":["User"],
+                "summary":"list users",
+                "description":"list all users",
+                "response":{
+                    "200":{
+                        "description": "Ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "type":"object",
+                                        "properties":{
+                                            "name":{
+                                                "type": "string"
+                                            },
+                                            "email":{
+                                                "type":"string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500":{
+                        "description": "Bad request"
+                    }
+                }
+
+            }
+        },
+        "/users/:id":{
+            "get":{
+                "tags":["User"],
+                "summary":"list user",
+                "description":"list selected user",
+                "response":{
+                    "200":{
+                        "description": "Ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "name":{
+                                            "type": "string"
+                                        },
+                                        "email":{
+                                            "type":"string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500":{
+                        "description": "Bad request"
+                    }
+                }
+
+            }
+        }
+
+    }
+}
